@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 def least_squares_power(x,y):
   """
     Fits a power law curve (y = a * x^b) to data using logarithmic transformation 
