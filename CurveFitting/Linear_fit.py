@@ -7,6 +7,8 @@ def least_squares_linear(x,y):
     """
   x = np.array(x)
   y = np.array(y) 
+  if len(x) != len(y):
+    raise ValueError("x and y must have same length")
   n = len(x)
   # Summations
   sx,sy = np.sum(x),np.sum(y)
