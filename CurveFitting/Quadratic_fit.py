@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 def least_squares_quadratic(x,y):
   """
     Fits a quadratic curve (y = a + bx + cx^2) to data using 
