@@ -9,34 +9,41 @@ def least_squares_exponential(x,y):
   
   x = np.array(x)
   y = np.array(y)
+  
   if len(x) != len(y):
     raise ValueError("x and y must have same length")
   if np.any(y<=0):
     raise ValueError("y must be positive")
-  l_y = np.log(y)
-  n = len(x)
+  
+  l_y = np.log(y) # ln(y) since only y is transformed in the equation
+  n = len(x) # length of the array
+  
   # Summation
   sx = np.sum(x)
   sx2 = np.sum(x**2)
   sy = np.sum(l_y)
   sxy = np.sum(x*l_y)
+  
   # Normal equations
   A = np.array([[n,sx],[sx,sx2]])
   B = np.array([[sy],[sxy]])
+  
   # Solving the system
   X = np.linalg.solve(A,B)
-  #Parameters
+  # Parameters
   a,b = X.flatten()
   a_exp = np.exp(a)
+  
   # Fitted Linearised equation
   l_y_f = a + b*x
+  
   # Fitted equation
   y_f = a_exp*np.exp(b*x)
+  
   # Plotting
   plt.figure(figsize=(10, 5))
   plt.subplot(1,2,1) # Original data
   plt.scatter(x,y,label='Data points')
-  # higher resolution x array for plotting the curve
   x_plot = np.linspace(np.min(x), np.max(x), 100)
   y_plot = a_exp*np.exp(b*x_plot)
   plt.plot(x_plot,y_plot,label=f"Fitted curve: $y = {a_exp:.4f}e^{{{b:.4f}x}}$")
@@ -45,6 +52,7 @@ def least_squares_exponential(x,y):
   plt.title('Fitted Exponential Law Curve')
   plt.grid()
   plt.legend()
+  
   plt.subplot(1,2,2) # Linearised log plot
   plt.scatter(x,l_y,label=f"Linearised Data")
   l_y_plot = a + b * x_plot
@@ -56,6 +64,7 @@ def least_squares_exponential(x,y):
   plt.legend(loc='lower right')
   plt.tight_layout()
   plt.show()
+  
   # Statistics
   y_mean = np.mean(y)
   SSY = np.sum((y-y_mean)**2)
