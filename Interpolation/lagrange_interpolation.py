@@ -11,7 +11,7 @@ def lagrange_int(x,y,x0,n=None):
   if len(x) != len(y):
     raise ValueError("x and y must have same length")
 
-   if n is None: 
+  if n is None: 
     n = len(x) - 1
      
   if n >= len(x):
